@@ -112,7 +112,7 @@ axon.serializer.messages=jackson
 
 The [consumer test (ordering)](ordering/src/test/java/com/example/orderdemo/ordering/command/OrderSagaTest.java) make use of the `JVM Consumer DSL` to describe the message format pacts and provide example data.
 Regular Axon Saga fixture test is enriched and extended with the Pact framework to prove that our consumer adheres to the contract.
-The contracts are persisted in [pacts](pacts) folder upon the consumer test execution.
+The contracts are persisted in [pacts](pacts) folder, upon the consumer test execution.
 
 Now let’s switch over to the [provider (shipping) test](shipping/src/test/java/com/example/orderdemo/shipping/command/ShipmentTest.java) which needs to verify that it is able to produce the expected messages.
 Regular Axon Aggregate fixture test is extended with the Pact framework to verify that the producer of the API (shipping) is able to produce expected events or handle expected commands.
@@ -157,6 +157,7 @@ We use H2 SQL database. Web console is enabled and it should be available on `/h
 - https://blog.codecentric.de/en/2019/11/message-pact-contract-testing-in-event-driven-applications/
 
 ---
+Created with :heart: by [Ivan Dugalic](http://idugalic.pro/)
 
 [maven]: https://maven.apache.org/ (Maven)
 [axon]: https://axoniq.io/ (Axon)
