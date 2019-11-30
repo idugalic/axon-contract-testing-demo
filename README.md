@@ -1,4 +1,6 @@
-# order demo
+# Order Demo - Bounded Contexts with Axon
+
+> This demo was inspired by the [blog post](https://axoniq.io/blog-overview/bounded-contexts-with-axon) which is published on [axoniq.io](https://axoniq.io/)
 
 <table>
     <tr>
@@ -7,7 +9,7 @@
     </tr>
     <tr>
         <td><strong>Concepts:</strong></td>
-        <td>Domain Driven Desing (Subdomains, Bounded Contexts, Ubiquitous Language, Aggregates, Value Objects)</td>
+        <td>Domain Driven Design (Subdomains, Bounded Contexts, Ubiquitous Language, Aggregates, Value Objects)</td>
     </tr>
     <tr>
         <td><strong>Architecture style:</strong></td>
@@ -19,7 +21,7 @@
     </tr>
     <tr>
         <td><strong>Technology:</strong></td>
-        <td>Kotlin, Axon (AxonFramework,  AxonServer CE), Spring (Boot), SQL</td>
+        <td>Kotlin, <strong>Axon (AxonFramework,  AxonServer CE)</strong>, Spring (Boot), SQL</td>
     </tr>
 </table>
 
@@ -28,9 +30,6 @@
 Customers use the website application(s) to place orders. Application coordinates order preparation and shipping.
 
 ## Sub-domains
-
->Typically, we can split complex domain into sub-domains, where each sub-domain corresponds to different part of the business.
-Identifying sub-domains requires understanding of the business, mostly its organizational structure and areas of expertise.
 
 - **Order** management
   - Order taking and fulfillment management
@@ -43,34 +42,47 @@ The `Order` (`Shipping`) objects ([aggregates](https://martinfowler.com/bliki/DD
 
 We must maintain consistency between these different 'orders' in different sub-domains.
 
-## Domain model
+> Typically, we can split complex domain into sub-domains, where each sub-domain corresponds to different part of the business.
+> Identifying sub-domains requires understanding of the business, mostly its organizational structure and areas of expertise.
 
->Domain model is mainly a software programing model which is applied to a specific sub-domain.
-It defines the vocabulary and acts as a communication tool for everyone involved (business and IT), deriving a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html).
+## Domain model
 
 Sub-domain *software programing* models:
 
  - [ordering](ordering)
  - [shipping](shipping)
  
+> Domain model is mainly a software programing model which is applied to a specific sub-domain.
+> It defines the vocabulary and acts as a communication tool for everyone involved (business and IT), deriving a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html).
+ 
 ## Bounded Context
 
->A goal is to develop a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html) as our domain (sub-domain) model within an explicitly Bounded Context.
->Therefore, there are a number of rules for Models and Contexts
+Each of this group of applications/services belongs to a specific bounded context:
+- [ordering](ordering) - Order bounded context, with messages serialized to JSON
+- [shipping](shipping) - Shipping bounded context, with messages serialized to JSON
+
+> A goal is to develop a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html) as our domain (sub-domain) model within an explicitly Bounded Context.
+> Therefore, there are a number of rules for Models and Contexts
 > - Explicitly define the context within which a model applies
 > - Ideally, keep one sub-domain model per one Bounded Context
 > - Explicitly set boundaries in terms of team organization, usage within specific parts of the application, and physical manifestations such as code bases and database schemas
-
+>
 > From a run-time perspective, Bounded Contexts represent logical boundaries, defined by contracts within software artifacts where the model is implemented.
 > In Axon applications/services, the contract (API) is represented as a set of messages (commands, events and queries) which the application publishes and consumes.
 > We create runnable applications(services) with contracts (API) published as schema.
 > This generally means that if the events/commands/queries are published as JSON, or perhaps a more economical object format, the consumer should consume the messages by parsing them to obtain their data attributes.
 
-Each of this group of applications/services belongs to a specific bounded context:
-- [Ordering](ordering) - Order bounded context, with messages serialized to JSON
-- [Shipping](shipping) - Shipping bounded context, with messages serialized to JSON
-
 ### Bounded Context Mappings
+
+These bounded contexts are in the **upstream-downstream** (more specifically: Customer-Supplier) relationship where the `Order` (downstream) depends on the API of the `Shipping` (upstream) only.
+
+For example, the Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
+Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentArrivedEvt)` from the Shipping service and will continue with the order fulfilment process.
+
+We coordinate these two services with [OrderSaga.java](ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
+
+
+
 
 > There are various patterns used to describe the relationships between different bounded contexts and teams that produce them:
 > - Shared Kernel - This is where two teams **share some subset of the domain model**. This shouldn't be changed without the other team being consulted.
@@ -79,19 +91,35 @@ Each of this group of applications/services belongs to a specific bounded contex
 > - Partner - The idea is that two teams have a **mutual dependency** on each other for delivery. They therefore need to work together on their modeling efforts.
 > - Anti-Corruption Layer (upstream-downstream) - The **downstream** team builds a layer to prevent **upstream** design to 'leak' into their own models, by transforming interactions.
 > - Separate Ways - cut them loose.
-
+>
 > Inverting [Conway’s Law](https://en.wikipedia.org/wiki/Conway%27s_law) allows us to align our organizational structure to our bounded contexts.
 > *"Any organization that designs a system will produce a design whose structure is a copy of the organization’s communication structure."*
-
+>
 > There should be one team assigned to work on one Bounded Context. There should also be a separate source code repository for each Bounded Context.
 It is possible that one team could work on multiple Bounded Contexts, but multiple teams should not work on a single Bounded Context.
-
+>
 > As our organizational structure is changing and our application evolves to microservices, we tend to diverge from `Conformist` and/or `Partner` to `Customer-Supplier` and/or `Anti-Corruption Layer` bounded context relationships, depending only on the schema of the messages. 
-We define automated acceptance tests [(Consumer Driven Contracts)](https://www.martinfowler.com/articles/consumerDrivenContracts.html) which validate the interface the upstream team provide.
+> We define automated acceptance tests [(Consumer Driven Contracts)](https://www.martinfowler.com/articles/consumerDrivenContracts.html) which validate the interface the upstream team provide.
 
+### Consumer Driven Contracts
 
-These bounded contexts are in the **upstream-downstream** (more specifically: Customer-Supplier) relationship where the `Order` (downstream) depends on the API of the `Shipping` (upstream) only.
-For example, the Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment. Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentArrivedEvt)` from the Shipping service and will continue with the order fulfilment process.
+[Pact](https://docs.pact.io/) is used to test message passing contracts. Pact is a code-first tool for testing HTTP and message integrations using contract tests.
+As we have serialized our messages (commands, events and queries) to JSON we can utilize Pact nicely.
+```properties
+axon.serializer.events=jackson
+axon.serializer.messages=jackson
+```
+
+The [consumer test (ordering)](ordering/src/test/java/com/example/orderdemo/ordering/command/OrderSagaTest.java) make use of the `JVM Consumer DSL` to describe the message format pacts and provide example data.
+Regular Axon Saga fixture test is enriched and extended with the Pact framework to prove that our consumer adheres to the contract.
+The contracts are persisted in [pacts](pacts) folder upon the consumer test execution.
+
+Now let’s switch over to the [provider (shipping) test](shipping/src/test/java/com/example/orderdemo/shipping/command/ShipmentTest.java) which needs to verify that it is able to produce the expected messages.
+Regular Axon Aggregate fixture test is extended with the Pact framework to verify that the producer of the API (shipping) is able to produce expected events or handle expected commands.
+
+In the real world you should consider using [Pact Broker](https://docs.pact.io/pact_broker/overview) instead of sharing contracts in the [pacts](pacts) folder.
+
+> Contract testing ensures that a pair of applications will work correctly together by checking each application in isolation to ensure the messages it sends or receives conform to a shared understanding that is documented in a "contract".
 
 ## Development
 
@@ -121,6 +149,12 @@ $ cd shipping && mvn spring-boot:run
 ### In-memory database
 
 We use H2 SQL database. Web console is enabled and it should be available on `/h2-console` URL (eg. `http://localhost:8080/h2-console`). Check  `application.properties` for the datasource URL.
+
+### References
+
+- https://axoniq.io/blog-overview/bounded-contexts-with-axon
+- https://github.com/fransvanbuul/orderdemo
+- https://blog.codecentric.de/en/2019/11/message-pact-contract-testing-in-event-driven-applications/
 
 ---
 
