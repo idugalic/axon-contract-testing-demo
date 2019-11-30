@@ -12,7 +12,7 @@
         "contentType": "application/json; charset\u003dUTF-8"
       },
       "contents": {
-        "shipmentId": "shipment_9b088a2e-941a-469c-83dc-89d760871ee8",
+        "shipmentId": "shipment_53422fc1-1ada-4faf-8e60-18119d4a0704",
         "destination": "destination"
       },
       "matchingRules": {
@@ -42,7 +42,7 @@
         "contentType": "application/json; charset\u003dUTF-8"
       },
       "contents": {
-        "shipmentId": "shipment_108cbdeb-e0ce-4910-9a2c-96f0b3e0a755"
+        "shipmentId": "shipment_e969bf97-2f6d-4e04-899c-8b43cb55c595"
       },
       "matchingRules": {
         "body": {
@@ -63,7 +63,7 @@
         "contentType": "application/json; charset\u003dUTF-8"
       },
       "contents": {
-        "shipmentId": "shipment_d66853f3-bd31-4983-9803-6bf3f126819b",
+        "shipmentId": "shipment_f698d7ad-dd90-4545-9ca0-279a4edd624f",
         "destination": "destination"
       },
       "matchingRules": {
