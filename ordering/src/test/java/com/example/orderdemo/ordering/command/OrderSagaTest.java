@@ -27,7 +27,7 @@ import java.util.UUID;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "shipping", providerType = ProviderType.ASYNCH)
-@PactFolder("pacts")
+@PactFolder("../pacts")
 class OrderSagaTest {
 
     private FixtureConfiguration fixture = new SagaTestFixture<>(OrderSaga.class);
