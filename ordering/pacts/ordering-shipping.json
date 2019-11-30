@@ -1,0 +1,99 @@
+{
+  "consumer": {
+    "name": "ordering"
+  },
+  "provider": {
+    "name": "shipping"
+  },
+  "messages": [
+    {
+      "description": "PrepareShipmentCmd",
+      "metaData": {
+        "contentType": "application/json; charset\u003dUTF-8"
+      },
+      "contents": {
+        "shipmentId": "shipment_3889c868-36f6-405b-b6c8-868b4c0e658d",
+        "destination": "destination"
+      },
+      "matchingRules": {
+        "body": {
+          "$.shipmentId": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          },
+          "$.destination": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      }
+    },
+    {
+      "description": "ShipmentArrivedEvt",
+      "metaData": {
+        "contentType": "application/json; charset\u003dUTF-8"
+      },
+      "contents": {
+        "shipmentId": "shipment_0e4917b6-5b82-4db8-b2ee-8ef208b14895"
+      },
+      "matchingRules": {
+        "body": {
+          "$.shipmentId": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      }
+    },
+    {
+      "description": "ShipmentPreparedEvt",
+      "metaData": {
+        "contentType": "application/json; charset\u003dUTF-8"
+      },
+      "contents": {
+        "shipmentId": "shipment_d1a92332-08d2-41e3-8cab-1a4bd8af7550",
+        "destination": "destination"
+      },
+      "matchingRules": {
+        "body": {
+          "$.shipmentId": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          },
+          "$.destination": {
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ],
+            "combine": "AND"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.14"
+    }
+  }
+}

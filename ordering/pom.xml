@@ -63,6 +63,20 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/au.com.dius/pact-jvm-consumer-junit5 -->
+        <dependency>
+            <groupId>au.com.dius</groupId>
+            <artifactId>pact-jvm-consumer-junit5_2.12</artifactId>
+            <version>3.6.14</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/au.com.dius/pact-jvm-consumer-java8 -->
+        <dependency>
+            <groupId>au.com.dius</groupId>
+            <artifactId>pact-jvm-consumer-java8_2.12</artifactId>
+            <version>3.6.14</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
