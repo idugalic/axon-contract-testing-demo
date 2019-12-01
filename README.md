@@ -108,7 +108,7 @@ We coordinate these two services with [OrderSaga.java](ordering/src/main/java/co
     activate OrderSaga
     
     OrderSaga-->>Order: RegisterShipmentForOrderArrivedCmd
-    deactivate OrderSaga
+    destroy OrderSaga
 @enduml
 ```
 
