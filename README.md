@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td><strong>Technology:</strong></td>
-        <td>Kotlin, <strong>Axon (AxonFramework,  AxonServer CE)</strong>, Spring (Boot), SQL</td>
+        <td>Java, <strong>Axon (AxonFramework,  AxonServer CE)</strong>, Spring (Boot), SQL</td>
     </tr>
 </table>
 
@@ -68,8 +68,10 @@ Each of this group of applications/services belongs to a specific bounded contex
 > - Explicitly set boundaries in terms of team organization, usage within specific parts of the application, and physical manifestations such as code bases and database schemas
 >
 > From a run-time perspective, Bounded Contexts represent logical boundaries, defined by contracts within software artifacts where the model is implemented.
+>
 > In Axon applications/services, the contract (API) is represented as a set of messages (commands, events and queries) which the application publishes and consumes.
 > We create runnable applications(services) with contracts (API) published as schema.
+> 
 > This generally means that if the events/commands/queries are published as JSON, or perhaps a more economical object format, the consumer should consume the messages by parsing them to obtain their data attributes.
 
 ### Bounded Context Mappings
