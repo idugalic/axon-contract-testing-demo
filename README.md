@@ -78,8 +78,8 @@ These bounded contexts are in the **upstream-downstream** (more specifically: Cu
 
 ![bounded-context-mapping-plantuml](.assets/bounded-context-mapping.svg)
 
-For example, the Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
-Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentArrivedEvt)` from the Shipping service and will continue with the order fulfilment process.
+The Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
+Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentPreparedEvt)` from the Shipping service and will continue with the order fulfilment process.
 
 We coordinate these two services with [OrderSaga.java](ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
 
