@@ -85,7 +85,7 @@ Once the courier delivers the shipment, the Order service(s) will receive an `ev
 
 We coordinate these two services with [OrderSaga.java](/ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
 
-![order-saga-plantuml](/.assets/order-saga-sequence-diagram.svg)
+![order-saga-plantuml](https://raw.githubusercontent.com/idugalic/orderdemo/master/.assets/order-saga-sequence-diagram.svg?sanitize=true)
 
 ```puml
 @startuml
