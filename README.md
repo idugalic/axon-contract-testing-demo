@@ -76,6 +76,8 @@ Each of this group of applications/services belongs to a specific bounded contex
 
 These bounded contexts are in the **upstream-downstream** (more specifically: Customer-Supplier) relationship where the `Order` (downstream) depends on the API of the `Shipping` (upstream) only.
 
+![bounded-context-mapping-plantuml](.assets/bounded-context-mapping.svg)
+
 For example, the Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
 Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentArrivedEvt)` from the Shipping service and will continue with the order fulfilment process.
 

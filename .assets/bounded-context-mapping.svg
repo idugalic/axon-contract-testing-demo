@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="168px" preserveAspectRatio="none" style="width:307px;height:168px;" version="1.1" viewBox="0 0 307 168" width="307px" zoomAndPan="magnify"><defs><filter height="300%" id="f1vmn7cmcit94d" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[c82f7a2f802741d70b2d9ad1ade4c0e3]
+entity Ordering--><rect fill="#ADD8E6" filter="url(#f1vmn7cmcit94d)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="216.5" y="8"/><rect fill="#ADD8E6" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="211.5" y="13"/><rect fill="#ADD8E6" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="211.5" y="34.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="226.5" y="30.9951">Ordering</text><!--MD5=[9f31497bca29be2183181c4f53fe9c22]
+entity Shipping--><rect fill="#90EE90" filter="url(#f1vmn7cmcit94d)" height="36.2969" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="216.5" y="121"/><rect fill="#90EE90" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="211.5" y="126"/><rect fill="#90EE90" height="5" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="211.5" y="147.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="226.5" y="143.9951">Shipping</text><path d="M6,13.5 L6,38.6328 A0,0 0 0 0 6,38.6328 L181,38.6328 A0,0 0 0 0 181,38.6328 L181,31.5 L216.417,26 L181,23.5 L181,23.5 L171,13.5 L6,13.5 A0,0 0 0 0 6,13.5 " fill="#FBFB77" filter="url(#f1vmn7cmcit94d)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M171,13.5 L171,23.5 L181,23.5 L171,13.5 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="154" x="12" y="30.5669">downstream (customer)</text><path d="M34,126.5 L34,151.6328 A0,0 0 0 0 34,151.6328 L181,151.6328 A0,0 0 0 0 181,151.6328 L181,144.5 L216.458,139 L181,136.5 L181,136.5 L171,126.5 L34,126.5 A0,0 0 0 0 34,126.5 " fill="#FBFB77" filter="url(#f1vmn7cmcit94d)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M171,126.5 L171,136.5 L181,136.5 L171,126.5 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="126" x="40" y="143.5669">upstream (supplier)</text><!--MD5=[307ab77788cce1105dd4935d89fb0d8a]
+link Ordering to Shipping--><path d="M256.5,44.344 C256.5,63.5677 256.5,94.6296 256.5,115.6606 " fill="none" id="Ordering-&gt;Shipping" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="256.5,120.778,260.5,111.778,256.5,115.778,252.5,111.778,256.5,120.778" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="23" x="257.5" y="87.0669">use</text><!--MD5=[d1dcea999614792b1580a46d18d22f68]
+@startuml
+[Ordering] ..> [Shipping] : use
+ note left of Ordering : downstream (customer)
+ note left of Shipping : upstream (supplier)
+ 
+ component  [Ordering] #LightBlue
+ component  [Shipping] #LightGreen
+@enduml
+
+PlantUML version 1.2019.12(Sun Nov 03 10:24:54 UTC 2019)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.7.0_25-b15
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
