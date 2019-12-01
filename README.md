@@ -49,8 +49,8 @@ We must maintain consistency between these different 'orders' in different sub-d
 
 Sub-domain *software programing* models:
 
- - [ordering](ordering)
- - [shipping](shipping)
+ - [ordering](/ordering)
+ - [shipping](/shipping)
  
 > Domain model is mainly a software programing model which is applied to a specific sub-domain.
 > It defines the vocabulary and acts as a communication tool for everyone involved (business and IT), deriving a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html).
@@ -58,8 +58,8 @@ Sub-domain *software programing* models:
 ## Bounded Context
 
 Each of this group of applications/services belongs to a specific bounded context:
-- [ordering](ordering) - Order bounded context, with messages serialized to JSON
-- [shipping](shipping) - Shipping bounded context, with messages serialized to JSON
+- [ordering](/ordering) - Order bounded context, with messages serialized to JSON
+- [shipping](/shipping) - Shipping bounded context, with messages serialized to JSON
 
 > A goal is to develop a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html) as our domain (sub-domain) model within an explicitly Bounded Context.
 > Therefore, there are a number of rules for Models and Contexts
@@ -78,14 +78,14 @@ Each of this group of applications/services belongs to a specific bounded contex
 
 These bounded contexts are in the **upstream-downstream** (more specifically: Customer-Supplier) relationship where the `Order` (downstream) depends on the API of the `Shipping` (upstream) only.
 
-![bounded-context-mapping-plantuml](./.assets/bounded-context-mapping.svg)
+![bounded-context-mapping-plantuml](/.assets/bounded-context-mapping.svg)
 
 The Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
 Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentPreparedEvt)` from the Shipping service and will continue with the order fulfilment process.
 
-We coordinate these two services with [OrderSaga.java](ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
+We coordinate these two services with [OrderSaga.java](/ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
 
-![order-saga-plantuml](./.assets/order-saga-sequence-diagram.svg)
+![order-saga-plantuml](/.assets/order-saga-sequence-diagram.svg)
 
 ```puml
 @startuml
@@ -140,11 +140,11 @@ axon.serializer.events=jackson
 axon.serializer.messages=jackson
 ```
 
-The [consumer test (ordering)](ordering/src/test/java/com/example/orderdemo/ordering/command/OrderSagaTest.java) make use of the `JVM Consumer DSL` to describe the message format pacts and provide example data.
+The [consumer test (ordering)](/ordering/src/test/java/com/example/orderdemo/ordering/command/OrderSagaTest.java) make use of the `JVM Consumer DSL` to describe the message format pacts and provide example data.
 Regular Axon Saga fixture test is enriched and extended with the Pact framework to prove that our consumer adheres to the contract.
-The contracts are persisted in [pacts](pacts) folder, upon the consumer test execution.
+The contracts are persisted in [pacts](/pacts) folder, upon the consumer test execution.
 
-Now let’s switch over to the [provider (shipping) test](shipping/src/test/java/com/example/orderdemo/shipping/command/ShipmentTest.java) which needs to verify that it is able to produce the expected messages.
+Now let’s switch over to the [provider (shipping) test](/shipping/src/test/java/com/example/orderdemo/shipping/command/ShipmentTest.java) which needs to verify that it is able to produce the expected messages.
 Regular Axon Aggregate fixture test is extended with the Pact framework to verify that the producer of the API (shipping) is able to produce expected events or handle expected commands.
 
 In the real world you should consider using [Pact Broker](https://docs.pact.io/pact_broker/overview) instead of sharing contracts in the [pacts](pacts) folder.
