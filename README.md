@@ -78,7 +78,7 @@ Each of this group of applications/services belongs to a specific bounded contex
 
 These bounded contexts are in the **upstream-downstream** (more specifically: Customer-Supplier) relationship where the `Order` (downstream) depends on the API of the `Shipping` (upstream) only.
 
-![bounded-context-mapping-plantuml](/.assets/bounded-context-mapping.svg)
+![bounded-context-mapping-plantuml](https://github.com/idugalic/orderdemo/blob/master/.assets/bounded-context-mapping.svg)
 
 The Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
 Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentPreparedEvt)` from the Shipping service and will continue with the order fulfilment process.
@@ -142,7 +142,7 @@ axon.serializer.messages=jackson
 
 The [consumer test (ordering)](/ordering/src/test/java/com/example/orderdemo/ordering/command/OrderSagaTest.java) make use of the `JVM Consumer DSL` to describe the message format pacts and provide example data.
 Regular Axon Saga fixture test is enriched and extended with the Pact framework to prove that our consumer adheres to the contract.
-The contracts are persisted in [pacts](/pacts) folder, upon the consumer test execution.
+The contracts are persisted in [pacts](https://github.com/idugalic/orderdemo/tree/master/pacts) folder, upon the consumer test execution.
 
 Now let’s switch over to the [provider (shipping) test](/shipping/src/test/java/com/example/orderdemo/shipping/command/ShipmentTest.java) which needs to verify that it is able to produce the expected messages.
 Regular Axon Aggregate fixture test is extended with the Pact framework to verify that the producer of the API (shipping) is able to produce expected events or handle expected commands.
