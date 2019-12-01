@@ -89,9 +89,9 @@ We coordinate these two services with [OrderSaga.java](ordering/src/main/java/co
 
 ```puml
 @startuml
-    participant OrderSaga
-    participant Order
-    participant Shipment
+    participant OrderSaga #LightBlue
+    participant Order #LightBlue
+    participant Shipment #LightGreen
 
     create OrderSaga
     Order-->>OrderSaga: OrderPlacedEvt
