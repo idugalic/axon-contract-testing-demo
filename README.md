@@ -1,4 +1,6 @@
-# Order Demo - Bounded Contexts with Axon
+# [projects](http://idugalic.github.io/projects)/order-demo
+
+# _Bounded Contexts with Axon_
 
 > This demo was inspired by the [blog post](https://axoniq.io/blog-overview/bounded-contexts-with-axon) which is published on [axoniq.io](https://axoniq.io/)
 
