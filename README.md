@@ -81,8 +81,34 @@ Once the courier delivers the shipment, the Order service(s) will receive an `ev
 
 We coordinate these two services with [OrderSaga.java](ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
 
+![order-saga-plantuml](.assets/order-saga-sequence-diagram.svg)
 
+```puml
+@startuml
+    participant OrderSaga
+    participant Order
+    participant Shipment
 
+    create OrderSaga
+    Order-->>OrderSaga: OrderPlacedEvt
+    activate OrderSaga
+
+    OrderSaga-->>Shipment: PrepareShipmentCmd
+    deactivate OrderSaga
+    
+    Shipment-->>OrderSaga: ShipmentPreparedEvt
+    activate OrderSaga
+    
+    OrderSaga-->>Order: RegisterShipmentForOrderPreparedCmd
+    deactivate OrderSaga
+    
+    Shipment-->>OrderSaga: ShipmentArrivedEvt
+    activate OrderSaga
+    
+    OrderSaga-->>Order: RegisterShipmentForOrderArrivedCmd
+    deactivate OrderSaga
+@enduml
+```
 
 > There are various patterns used to describe the relationships between different bounded contexts and teams that produce them:
 > - Shared Kernel - This is where two teams **share some subset of the domain model**. This shouldn't be changed without the other team being consulted.
