@@ -49,7 +49,7 @@ We must maintain consistency between these different 'orders' in different sub-d
 
 Sub-domain *software programing* models:
 
- - [ordering](/ordering)
+ - [ordering](https://github.com/idugalic/orderdemo/tree/master/ordering)
  - [shipping](/shipping)
  
 > Domain model is mainly a software programing model which is applied to a specific sub-domain.
@@ -58,8 +58,8 @@ Sub-domain *software programing* models:
 ## Bounded Context
 
 Each of this group of applications/services belongs to a specific bounded context:
-- [ordering](/ordering) - Order bounded context, with messages serialized to JSON
-- [shipping](/shipping) - Shipping bounded context, with messages serialized to JSON
+- [ordering](https://github.com/idugalic/orderdemo/tree/master/ordering) - Order bounded context, with messages serialized to JSON
+- [shipping](https://github.com/idugalic/orderdemo/tree/master/shipping) - Shipping bounded context, with messages serialized to JSON
 
 > A goal is to develop a [Ubiquitous Language](https://martinfowler.com/bliki/UbiquitousLanguage.html) as our domain (sub-domain) model within an explicitly Bounded Context.
 > Therefore, there are a number of rules for Models and Contexts
@@ -78,14 +78,14 @@ Each of this group of applications/services belongs to a specific bounded contex
 
 These bounded contexts are in the **upstream-downstream** (more specifically: Customer-Supplier) relationship where the `Order` (downstream) depends on the API of the `Shipping` (upstream) only.
 
-![bounded-context-mapping-plantuml](/.assets/bounded-context-mapping.svg)
+![bounded-context-mapping-plantuml](https://raw.githubusercontent.com/idugalic/orderdemo/master/.assets/bounded-context-mapping.svg)
 
 The Order service is responsible for the order fulfilment process and it will trigger a `command (PrepareShipmentCmd)` to the Shipping service(s) to create/prepare a Shipment.
 Once the courier delivers the shipment, the Order service(s) will receive an `event (ShipmentPreparedEvt)` from the Shipping service and will continue with the order fulfilment process.
 
 We coordinate these two services with [OrderSaga.java](/ordering/src/main/java/com/example/orderdemo/ordering/command/OrderSaga.java) to maintain consistency between these different orders (Order, Shipment) from different bounded contexts.
 
-![order-saga-plantuml](/.assets/order-saga-sequence-diagram.svg)
+![order-saga-plantuml](https://raw.githubusercontent.com/idugalic/orderdemo/master/.assets/order-saga-sequence-diagram.svg)
 
 ```puml
 @startuml
