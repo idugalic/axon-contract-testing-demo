@@ -1,4 +1,4 @@
-# [projects](http://idugalic.github.io/projects)/order-demo
+# [projects](http://idugalic.github.io/projects)/axon-contract-testing-demo
 
 # _Bounded Contexts with Axon_
 
