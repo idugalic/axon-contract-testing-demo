@@ -10,10 +10,10 @@
     </parent>
     <packaging>pom</packaging>
     <groupId>com.example</groupId>
-    <artifactId>orderdemo</artifactId>
+    <artifactId>axon-contract-testing-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>orderdemo (parent)</name>
-    <description>Demo project for Axon multi-context, Saga and Pact</description>
+    <name>axon-contract-testing-demo (parent)</name>
+    <description>Demo project for Axon multi-context, Saga and Pact (contract testing)</description>
 
     <properties>
         <java.version>1.8</java.version>
