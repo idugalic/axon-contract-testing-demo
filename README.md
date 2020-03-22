@@ -189,7 +189,7 @@ We use H2 SQL database. Web console is enabled and it should be available on `/h
 - https://blog.codecentric.de/en/2019/11/message-pact-contract-testing-in-event-driven-applications/
 
 ---
-Created with :heart: by [Ivan Dugalic](http://idugalic.pro/)
+Created with :heart: by [Ivan Dugalic](https://idugalic.github.io/)
 
 [maven]: https://maven.apache.org/ (Maven)
 [axon]: https://axoniq.io/ (Axon)
